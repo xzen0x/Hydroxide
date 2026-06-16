@@ -61,6 +61,7 @@ local icons = {
     ignore = "rbxassetid://4842578510",
     unignore = "rbxassetid://4842578818",
     RemoteEvent = "rbxassetid://4229806545",
+    UnreliableRemoteEvent = "rbxassetid://4229806545",
     RemoteFunction = "rbxassetid://4229810474",
     BindableEvent = "rbxassetid://4229809371",
     BindableFunction = "rbxassetid://4229807624"
@@ -837,7 +838,7 @@ scriptContext:SetCallback(function()
     local remotePath = getInstancePath(selectedRemote)
     local method
 
-    if remoteClassName == "RemoteEvent" then
+    if remoteClassName == ("RemoteEvent" or "UnreliableRemoteEvent") then
         method = "FireServer"
     elseif remoteClassName == "RemoteFunction" then
         method = "InvokeServer"
@@ -911,7 +912,7 @@ repeatCallContext:SetCallback(function()
     local remoteClassName = remoteInstance.ClassName
     local method 
 
-    if remoteClassName == "RemoteEvent" then
+    if remoteClassName == ("RemoteEvent" or "UnreliableRemoteEvent") then
         method = "FireServer"
     elseif remoteClassName == "RemoteFunction" then
         method = "InvokeServer"
